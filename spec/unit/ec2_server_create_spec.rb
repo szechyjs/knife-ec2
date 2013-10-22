@@ -546,6 +546,13 @@ describe Chef::Knife::Ec2ServerCreate do
 
       server_def[:iam_instance_profile_name].should == nil
     end
+
+    it "sets the spot price" do
+      @knife_ec2_create.config[:spot_price] = '1.99'
+      server_def = @knife_ec2_create.create_server_def
+
+      server_def[:price].should == '1.99'
+    end
   end
 
   describe "ssh_connect_host" do
